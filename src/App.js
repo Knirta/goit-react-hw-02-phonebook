@@ -5,10 +5,11 @@ class App extends Component {
   state = {
     contacts: [],
     name: "",
+    number: "",
   };
 
   handleChange = (e) => {
-    this.setState({ name: e.currentTarget.value });
+    this.setState({ [e.currentTarget.name]: e.currentTarget.value });
   };
 
   handleSubmit = (e) => {
@@ -21,6 +22,7 @@ class App extends Component {
     const contact = {
       id: uuidv4(),
       name: this.state.name,
+      number: this.state.number,
     };
 
     this.setState(({ contacts }) => ({
@@ -29,7 +31,7 @@ class App extends Component {
   };
 
   reset = () => {
-    this.setState({ name: "" });
+    this.setState({ name: "", number: "" });
   };
 
   render() {
@@ -50,6 +52,18 @@ class App extends Component {
                 value={this.state.name}
               />
             </label>
+            <label>
+              Number:
+              <input
+                type="tel"
+                name="number"
+                pattern="\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}"
+                title="Номер телефона должен состоять цифр и может содержать пробелы, тире, круглые скобки и может начинаться с +"
+                required
+                value={this.state.number}
+                onChange={this.handleChange}
+              />
+            </label>
             <button type="submit">Add contact</button>
           </form>
         </section>
@@ -57,7 +71,9 @@ class App extends Component {
           <h2>Contacts</h2>
           <ul>
             {this.state.contacts.map((contact) => (
-              <li key={contact.id}>{contact.name}</li>
+              <li key={contact.id}>
+                {contact.name}: {contact.number}
+              </li>
             ))}
           </ul>
         </section>
