@@ -1,7 +1,13 @@
 import React, { Component } from "react";
+import PropTypes from "prop-types";
 import "./ContactForm.scss";
 
 class ContactForm extends Component {
+  static propTypes = {
+    name: PropTypes.string.isRequired,
+    number: PropTypes.string.isRequired,
+  };
+
   state = {
     name: "",
     number: "",
@@ -24,10 +30,11 @@ class ContactForm extends Component {
   render() {
     const { name, number } = this.state;
     return (
-      <form onSubmit={this.handleSubmit}>
+      <form className="Form" onSubmit={this.handleSubmit}>
         <label>
-          Name:
+          <p className="Form__label">Name:</p>
           <input
+            className="Form__input"
             type="text"
             name="name"
             pattern="^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$"
@@ -38,8 +45,9 @@ class ContactForm extends Component {
           />
         </label>
         <label>
-          Number:
+          <p className="Form__label">Number:</p>
           <input
+            className="Form__input"
             type="tel"
             name="number"
             pattern="\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}"
@@ -49,7 +57,9 @@ class ContactForm extends Component {
             onChange={this.handleChange}
           />
         </label>
-        <button type="submit">Add contact</button>
+        <button className="Form__button" type="submit">
+          Add contact
+        </button>
       </form>
     );
   }

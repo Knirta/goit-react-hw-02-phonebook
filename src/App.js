@@ -2,7 +2,9 @@ import React, { Component } from "react";
 import ContactForm from "./components/contactForm";
 import Filter from "./components/filter";
 import ContactList from "./components/contactList";
+import Container from "./components/container";
 import { v4 as uuidv4 } from "uuid";
+import "./App.scss";
 
 class App extends Component {
   state = {
@@ -57,16 +59,16 @@ class App extends Component {
     const filteredContacts = this.filterContact();
 
     return (
-      <>
-        <h1>Phonebook</h1>
+      <Container>
+        <h1 className="title">Phonebook</h1>
         <ContactForm onSubmit={this.addContact} />
-        <h2>Contacts</h2>
+        <h2 className="title">Contacts</h2>
         <Filter filter={filter} handleFilter={this.handleFilter} />
         <ContactList
           contacts={filteredContacts}
           deleteContact={this.deleteContact}
         />
-      </>
+      </Container>
     );
   }
 }
