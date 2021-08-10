@@ -3,14 +3,18 @@ import PropTypes from "prop-types";
 import "./ContactForm.scss";
 
 class ContactForm extends Component {
+  static defaultProps = {
+    initialInput: "",
+  };
+
   static propTypes = {
-    name: PropTypes.string.isRequired,
-    number: PropTypes.string.isRequired,
+    name: PropTypes.string,
+    number: PropTypes.string,
   };
 
   state = {
-    name: "",
-    number: "",
+    name: this.props.initialInput,
+    number: this.props.initialInput,
   };
 
   handleChange = (e) => {
